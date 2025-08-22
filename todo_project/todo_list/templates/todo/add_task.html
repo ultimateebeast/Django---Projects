@@ -1,21 +1,22 @@
+<!-- todo/templates/todo/add_task.html -->
 {% extends 'todo/base.html' %}
 
 {% block title %}Add Task{% endblock %}
 
 {% block content %}
-<div class="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
-    <h1 class="text-2xl font-bold text-gray-800 mb-4">Add New Task</h1>
-    <form method="post" class="space-y-4">
+<div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-3xl shadow-3xl p-8 md:p-12 max-w-lg mx-auto transform transition-all duration-500 scale-95 hover:scale-100 animate-in fade-in slide-in-from-top-12">
+    <h1 class="text-3xl font-extrabold text-gray-900 mb-8 text-center tracking-tight">Create a New Task</h1>
+    <form method="post" class="space-y-6">
         {% csrf_token %}
         <div>
-            <label for="title" class="block text-gray-700 font-medium mb-1">Task Title</label>
-            <input type="text" name="title" id="title" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <label for="title" class="block text-gray-700 font-semibold mb-2 text-lg">Task Title</label>
+            <input type="text" name="title" id="title" placeholder="Enter your task here..." class="w-full px-5 py-3 border-2 border-transparent rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 transform hover:scale-[1.01] shadow-md hover:shadow-lg" required>
         </div>
-        <div class="flex space-x-4">
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:scale-95">
                 Add Task
             </button>
-            <a href="{% url 'task_list' %}" class="w-full text-center bg-gray-400 text-white py-2 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200">
+            <a href="{% url 'task_list' %}" class="w-full text-center bg-gray-400 text-white py-3 rounded-lg font-bold shadow-lg hover:bg-gray-500 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:scale-95">
                 Cancel
             </a>
         </div>

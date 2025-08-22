@@ -1,15 +1,26 @@
+<!-- todo/templates/todo/base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Django To-Do List{% endblock %}</title>
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap)');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
+            transition: background-color 0.3s ease;
+        }
+        .container-bg {
+            background-image: radial-gradient(at 0% 0%, #a5b4fc, #eef2ff), radial-gradient(at 100% 100%, #818cf8, #d1d5db);
+            background-size: 200% 200%;
+            animation: moveGradient 10s ease infinite alternate;
+        }
+        @keyframes moveGradient {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
         .pulse-animation {
             animation: pulse-ring 1.2s cubic-bezier(0.2, 0, 0, 1) infinite;
@@ -28,7 +39,7 @@
         }
     </style>
 </head>
-<body>
+<body class="container-bg">
     <div class="container mx-auto p-4 md:p-8">
         {% block content %}{% endblock %}
     </div>

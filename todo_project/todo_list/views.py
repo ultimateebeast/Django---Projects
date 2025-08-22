@@ -2,12 +2,28 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Task
 from django.http import Http404
 
+# todo/views.py
+
+from django.shortcuts import render
+from .models import Task
+
 def task_list(request):
     """
-    Displays a list of all tasks.
+    Displays a list of all tasks with a calculated animation delay.
     """
     tasks = Task.objects.all()
-    return render(request, 'todo/task_list.html', {'tasks': tasks})
+
+    # Create a new list with animation delays
+    tasks_with_delay = []
+    for index, task in enumerate(tasks):
+        delay = index * 0.1
+        tasks_with_delay.append({
+            'task': task,
+            'delay': delay
+        })
+
+    # Pass the new list to the template
+    return render(request, 'todo/task_list.html', {'tasks': tasks_with_delay})
 
 def task_detail(request, pk):
     """

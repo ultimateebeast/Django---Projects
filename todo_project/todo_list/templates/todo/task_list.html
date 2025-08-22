@@ -1,28 +1,35 @@
+<!-- todo/templates/todo/task_list.html -->
 {% extends 'todo/base.html' %}
 
 {% block title %}To-Do List{% endblock %}
 
 {% block content %}
-<div class="bg-white rounded-lg shadow-lg p-6">
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">My To-Do List</h1>
-        <a href="{% url 'add_task' %}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-            Add New Task
-        </a>
+<div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 transform transition-transform duration-500 hover:scale-[1.01] animate-in fade-in slide-in-from-top-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b-2 pb-4 border-gray-100">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4 md:mb-0">My To-Do List</h1>
+        <div class="relative group">
+            <a href="{% url 'add_task' %}" class="relative inline-flex items-center justify-center bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:-translate-y-1 overflow-hidden">
+                Add New Task
+                <span class="absolute block w-full h-full bg-blue-500 opacity-20 -z-10 pulse-animation"></span>
+            </a>
+        </div>
     </div>
 
     {% if tasks %}
     <ul class="space-y-4">
-        {% for task in tasks %}
-        <li class="bg-gray-100 p-4 rounded-lg flex items-center justify-between shadow-sm">
-            <span class="text-lg {% if task.completed %}line-through text-gray-500{% endif %}">
-                {{ task.title }}
-            </span>
-            <div class="flex items-center space-x-2">
-                <a href="{% url 'update_task' task.pk %}" class="bg-green-500 text-white px-3 py-1 text-sm rounded-md hover:bg-green-600 transition-colors duration-200">
+        {% for item in tasks %}
+        <li class="bg-gray-50 p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between shadow-sm border-2 border-gray-100 hover:border-blue-300 transition-all duration-300 transform hover:scale-[1.02] slide-in-up" style="animation-delay: {{ item.delay }}s;">
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <input type="checkbox" {% if item.task.completed %}checked{% endif %} class="h-6 w-6 text-blue-600 border-gray-300 rounded-full focus:ring-blue-500 transition-colors duration-300 transform scale-125 cursor-pointer" onchange="window.location.href='{% url 'update_task' item.task.pk %}' + '?toggle_completed=true'">
+                <span class="text-lg font-medium {% if item.task.completed %}line-through text-gray-400{% else %}text-gray-800{% endif %} transition-all duration-300">
+                    {{ item.task.title }}
+                </span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="{% url 'update_task' item.task.pk %}" class="bg-green-500 text-white px-4 py-2 text-sm rounded-lg font-semibold hover:bg-green-600 transition-colors duration-300 transform hover:scale-105">
                     Edit
                 </a>
-                <a href="{% url 'delete_task' task.pk %}" class="bg-red-500 text-white px-3 py-1 text-sm rounded-md hover:bg-red-600 transition-colors duration-200">
+                <a href="{% url 'delete_task' item.task.pk %}" class="bg-red-500 text-white px-4 py-2 text-sm rounded-lg font-semibold hover:bg-red-600 transition-colors duration-300 transform hover:scale-105">
                     Delete
                 </a>
             </div>
@@ -30,7 +37,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p class="text-center text-gray-500">No tasks yet. Add one!</p>
+    <p class="text-center text-xl text-gray-500 py-10">No tasks yet. Get started by adding one!</p>
     {% endif %}
 </div>
 {% endblock %}
