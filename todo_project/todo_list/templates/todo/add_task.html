@@ -1,0 +1,24 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Add New Task</h1>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="title" class="block text-gray-700 font-medium mb-1">Task Title</label>
+            <input type="text" name="title" id="title" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div class="flex space-x-4">
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                Add Task
+            </button>
+            <a href="{% url 'task_list' %}" class="w-full text-center bg-gray-400 text-white py-2 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

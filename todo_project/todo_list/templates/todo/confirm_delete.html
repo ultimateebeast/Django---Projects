@@ -1,0 +1,19 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Delete Task{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto text-center">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Delete Task</h1>
+    <p class="text-gray-600 mb-6">Are you sure you want to delete the task: "<span class="font-semibold">{{ task.title }}</span>"?</p>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200">
+            Confirm Delete
+        </button>
+        <a href="{% url 'task_list' %}" class="w-full block text-center bg-gray-400 text-white py-2 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200">
+            Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}

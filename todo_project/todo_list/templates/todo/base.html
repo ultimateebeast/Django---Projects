@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django To-Do List{% endblock %}</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <style>
+        @import url('[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap)');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .pulse-animation {
+            animation: pulse-ring 1.2s cubic-bezier(0.2, 0, 0, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        .slide-in-up {
+            animation: slideInUp 0.5s ease-out forwards;
+        }
+        @keyframes slideInUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
