@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts tagged with {{ tag.name }}</title>
+</head>
+<body>
+    <h1>Posts tagged with "{{ tag.name }}"</h1>
+    <ul>
+        {% for post in tag_posts %}
+        <li>
+            <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+            <p>{{ post.author }} | {{ post.created_on|date:"F j, Y" }}</p>
+            <p>Category: <a href="{% url 'category_posts' post.category.slug %}">{{ post.category.name }}</a></p>
+        </li>
+        {% empty %}
+        <li>No posts with this tag yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to all posts</a>
+</body>
+</html>

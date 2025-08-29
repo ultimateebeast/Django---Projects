@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts in {{ category.name }}</title>
+</head>
+<body>
+    <h1>Posts in {{ category.name }}</h1>
+    <ul>
+        {% for post in category_posts %}
+        <li>
+            <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+            <p>{{ post.author }} | {{ post.created_on|date:"F j, Y" }}</p>
+            <p>Tags:
+                {% for tag in post.tags.all %}
+                    <a href="{% url 'tag_posts' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </li>
+        {% empty %}
+        <li>No posts in this category yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to all posts</a>
+</body>
+</html>
